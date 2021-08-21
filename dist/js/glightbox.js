@@ -1740,6 +1740,12 @@
       }
     }, false);
     img.src = data.href;
+
+    if (data.sizes != '' && data.srcset != '') {
+      img.sizes = data.sizes;
+      img.srcset = data.srcset;
+    }
+
     img.alt = '';
 
     if (!isNil(data.alt) && data.alt !== '') {
@@ -1971,6 +1977,8 @@
 
       this.defaults = {
         href: '',
+        sizes: '',
+        srcset: '',
         title: '',
         type: '',
         description: '',
@@ -1995,7 +2003,7 @@
         var origin = url;
         url = url.toLowerCase();
 
-        if (url.match(/\.(jpeg|jpg|jpe|gif|png|apn|webp|svg)$/) !== null) {
+        if (url.match(/\.(jpeg|jpg|jpe|gif|png|apn|webp|avif|svg)$/) !== null) {
           return 'image';
         }
 
@@ -2515,11 +2523,12 @@
     svg: {
       close: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"><g><g><path d="M505.943,6.058c-8.077-8.077-21.172-8.077-29.249,0L6.058,476.693c-8.077,8.077-8.077,21.172,0,29.249C10.096,509.982,15.39,512,20.683,512c5.293,0,10.586-2.019,14.625-6.059L505.943,35.306C514.019,27.23,514.019,14.135,505.943,6.058z"/></g></g><g><g><path d="M505.942,476.694L35.306,6.059c-8.076-8.077-21.172-8.077-29.248,0c-8.077,8.076-8.077,21.171,0,29.248l470.636,470.636c4.038,4.039,9.332,6.058,14.625,6.058c5.293,0,10.587-2.019,14.624-6.057C514.018,497.866,514.018,484.771,505.942,476.694z"/></g></g></svg>',
       next: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"> <g><path d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z"/></g></svg>',
-      prev: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"><g><path d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/></g></svg>'
+      prev: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"><g><path d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/></g></svg>',
+      download: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" stroke-width="1.5" xml:space="preserve"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><polyline points="7 11 12 16 17 11" /><line x1="12" y1="4" x2="12" y2="16" /></svg>'
     }
   };
-  defaults.slideHTML = "<div class=\"gslide\">\n    <div class=\"gslide-inner-content\">\n        <div class=\"ginner-container\">\n            <div class=\"gslide-media\">\n            </div>\n            <div class=\"gslide-description\">\n                <div class=\"gdesc-inner\">\n                    <h4 class=\"gslide-title\"></h4>\n                    <div class=\"gslide-desc\"></div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
-  defaults.lightboxHTML = "<div id=\"glightbox-body\" class=\"glightbox-container\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"false\">\n    <div class=\"gloader visible\"></div>\n    <div class=\"goverlay\"></div>\n    <div class=\"gcontainer\">\n    <div id=\"glightbox-slider\" class=\"gslider\"></div>\n    <button class=\"gclose gbtn\" aria-label=\"Close\" data-taborder=\"3\">{closeSVG}</button>\n    <button class=\"gprev gbtn\" aria-label=\"Previous\" data-taborder=\"2\">{prevSVG}</button>\n    <button class=\"gnext gbtn\" aria-label=\"Next\" data-taborder=\"1\">{nextSVG}</button>\n</div>\n</div>";
+  defaults.slideHTML = "<div class='gslide'>\n    <div class='gslide-inner-content'>\n        <div class='ginner-container'>\n            <div class='gslide-media'>\n            </div>\n            <div class='gslide-description'>\n                <div class='gdesc-inner'>\n                    <h4 class='gslide-title'></h4>\n                    <div class='gslide-desc'></div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
+  defaults.lightboxHTML = "<div id='glightbox-body' class='glightbox-container' tabindex='-1' role='dialog' aria-hidden='false'>\n    <div class='gloader visible'></div>\n    <div class='goverlay'></div>\n    <div class='gcontainer'>\n    <div id='glightbox-slider' class='gslider'></div>\n    <button class='gdownload gbtn' aria-label='Download' data-taborder='4'>{downloadSVG}</button>\n    <button class='gclose gbtn' aria-label='Close' data-taborder='3'>{closeSVG}</button>\n    <button class='gprev gbtn' aria-label='Previous' data-taborder='2'>{prevSVG}</button>\n    <button class='gnext gbtn' aria-label='Next' data-taborder='1'>{nextSVG}</button>\n</div>\n</div>";
 
   var GlightboxInit = function () {
     function GlightboxInit() {
@@ -3291,10 +3300,12 @@
         var nextSVG = has(this.settings.svg, 'next') ? this.settings.svg.next : '';
         var prevSVG = has(this.settings.svg, 'prev') ? this.settings.svg.prev : '';
         var closeSVG = has(this.settings.svg, 'close') ? this.settings.svg.close : '';
+        var downloadSVG = has(this.settings.svg, 'download') ? this.settings.svg.download : '';
         var lightboxHTML = this.settings.lightboxHTML;
         lightboxHTML = lightboxHTML.replace(/{nextSVG}/g, nextSVG);
         lightboxHTML = lightboxHTML.replace(/{prevSVG}/g, prevSVG);
         lightboxHTML = lightboxHTML.replace(/{closeSVG}/g, closeSVG);
+        lightboxHTML = lightboxHTML.replace(/{downloadSVG}/g, downloadSVG);
         lightboxHTML = createHTML(lightboxHTML);
         document.body.appendChild(lightboxHTML);
         var modal = document.getElementById('glightbox-body');
@@ -3302,6 +3313,7 @@
         var closeButton = modal.querySelector('.gclose');
         this.prevButton = modal.querySelector('.gprev');
         this.nextButton = modal.querySelector('.gnext');
+        this.downloadButton = modal.querySelector('.gdownload');
         this.overlay = modal.querySelector('.goverlay');
         this.loader = modal.querySelector('.gloader');
         this.slidesContainer = document.getElementById('glightbox-slider');
@@ -3356,6 +3368,16 @@
                   _this7.close();
                 }
               }
+            }
+          });
+        }
+
+        if (this.downloadButton) {
+          this.events['download'] = addEvent('click', {
+            onElement: this.downloadButton,
+            withCallback: function withCallback(e, target) {
+              e.preventDefault();
+              window.open(_this7.activeSlide.getElementsByTagName('img')[0].currentSrc, '_blank').focus();
             }
           });
         }

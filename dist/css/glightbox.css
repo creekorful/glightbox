@@ -439,7 +439,8 @@
 
 .gprev,
 .gnext,
-.gclose {
+.gclose,
+.gdownload {
   z-index: 99999;
   cursor: pointer;
   width: 26px;
@@ -462,7 +463,8 @@
 
 .gprev svg,
 .gnext svg,
-.gclose svg {
+.gclose svg,
+.gdownload svg {
   display: block;
   width: 25px;
   height: auto;
@@ -472,13 +474,15 @@
 
 .gprev.disabled,
 .gnext.disabled,
-.gclose.disabled {
+.gclose.disabled,
+.gdownload.disabled {
   opacity: 0.1;
 }
 
 .gprev .garrow,
 .gnext .garrow,
-.gclose .garrow {
+.gclose .garrow,
+.gdownload .garrow {
   stroke: #fff;
 }
 
@@ -492,7 +496,8 @@ iframe.wait-autoplay {
 
 .glightbox-closing .gnext,
     .glightbox-closing .gprev,
-    .glightbox-closing .gclose {
+    .glightbox-closing .gclose,
+    .glightbox-closing .gdownload {
   opacity: 0 !important;
 }
 
@@ -529,14 +534,16 @@ iframe.wait-autoplay {
 
 .glightbox-clean .gprev,
     .glightbox-clean .gnext,
-    .glightbox-clean .gclose {
+    .glightbox-clean .gclose,
+    .glightbox-clean .gdownload {
   background-color: rgba(0, 0, 0, 0.75);
   border-radius: 4px;
 }
 
 .glightbox-clean .gprev path,
 .glightbox-clean .gnext path,
-.glightbox-clean .gclose path {
+.glightbox-clean .gclose path,
+.glightbox-clean .gdownload path {
   fill: #fff;
 }
 
@@ -570,6 +577,23 @@ iframe.wait-autoplay {
 }
 
 .glightbox-clean .gclose:hover {
+  opacity: 1;
+}
+
+.glightbox-clean .gdownload {
+  width: 35px;
+  height: 35px;
+  top: 15px;
+  right: 65px;
+  position: absolute;
+}
+
+.glightbox-clean .gdownload svg {
+  width: 18px;
+  height: auto;
+}
+
+.glightbox-clean .gdownload:hover {
   opacity: 1;
 }
 
@@ -908,12 +932,14 @@ iframe.wait-autoplay {
   }
   .glightbox-clean .gprev,
     .glightbox-clean .gnext,
-    .glightbox-clean .gclose {
+    .glightbox-clean .gclose,
+    .glightbox-clean .gdownload {
     background-color: rgba(0, 0, 0, 0.32);
   }
   .glightbox-clean .gprev:hover,
 .glightbox-clean .gnext:hover,
-.glightbox-clean .gclose:hover {
+.glightbox-clean .gclose:hover,
+.glightbox-clean .gdownload:hover {
     background-color: rgba(0, 0, 0, 0.7);
   }
   .glightbox-clean .gprev {
@@ -928,6 +954,10 @@ iframe.wait-autoplay {
   .glightbox-clean .gclose {
     opacity: 0.7;
     right: 20px;
+  }
+  .glightbox-clean .gdownload {
+    opacity: 0.7;
+    right: 65px;
   }
 }
 

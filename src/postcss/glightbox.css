@@ -446,7 +446,8 @@
 
 .gprev,
 .gnext,
-.gclose {
+.gclose,
+.gdownload {
     z-index: 99999;
     cursor: pointer;
     width: 26px;
@@ -485,7 +486,8 @@ iframe.wait-autoplay {
 .glightbox-closing {
     .gnext,
     .gprev,
-    .gclose {
+    .gclose,
+    .gdownload {
         opacity: 0 !important;
     }
 }
@@ -539,7 +541,8 @@ iframe.wait-autoplay {
 
     .gprev,
     .gnext,
-    .gclose {
+    .gclose,
+    .gdownload {
         background-color: rgba(0, 0, 0, 0.75);
         border-radius: 4px;
 
@@ -599,6 +602,28 @@ iframe.wait-autoplay {
 
         &:hover {
             opacity: 1;
+        }
+    }
+
+    .gdownload {
+        width: 35px;
+        height: 35px;
+        top: 15px;
+        right: 65px;
+        position: absolute;
+
+        svg {
+            width: 18px;
+            height: auto;
+        }
+
+        @media (--medium-viewport) {
+            opacity: 0.7;
+            right: 65px;
+        }
+
+        &:hover {
+             opacity: 1;
         }
     }
 }
